@@ -2,10 +2,12 @@ package com.example.a00227178.myapp;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.internal.widget.AdapterViewCompat;
@@ -23,7 +25,9 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,11 +37,12 @@ public class SquadBuilder extends ActionBarActivity {
     String[] squad = {"Ronan Cassidy","Tom Devery","Johnny Kenny","Georgie Digan", "Darren Kelly","Colin Kenny","Colm Kelly","Pat Brennan",
             "Jordan Drennan","Steven Thompson","Billy Dunican", "Joe Kenny","Oisin Kelly","David Kelly","Ronan McGuire","Simon Goodman","B.Kenny"};
     ArrayAdapter<String> adapter;
+    View content;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squad_builder);
-
+        content = findViewById(R.id.team_layout);
         ListView listView = (ListView) findViewById(R.id.listview);
         final ArrayList<String> list = new ArrayList<String>();
 
@@ -85,31 +90,48 @@ public class SquadBuilder extends ActionBarActivity {
 
         return true;
     }
-    private void takeScreenshot() {
-        Date now = new Date();
-        android.text.format.DateFormat.format("yyyy-MM-dd", now);
-
+    private void captureScreen() {
+        View v = getWindow().getDecorView().getRootView();
+        v.setDrawingCacheEnabled(true);
+        Bitmap bmp = Bitmap.createBitmap(v.getDrawingCache());
+        v.setDrawingCacheEnabled(false);
         try {
-            // image naming and path  to include sd card  appending name you choose for file
-            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
-            mPath  = mPath.replaceAll("[|?*<\":>+\\[\\]/']", "_");
-            // create bitmap screen capture
-            View v1 = getWindow().getDecorView().getRootView();
-            v1.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-            v1.setDrawingCacheEnabled(false);
-
-            File imageFile = new File(mPath);
-
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
-
-            //openScreenshot(imageFile);
-        } catch (Throwable e) {
-            // Several error may come out with file handling or OOM
+            FileOutputStream fos = new FileOutputStream(new File(Environment
+                    .getExternalStorageDirectory().toString(), "SCREEN"
+                    + System.currentTimeMillis() + ".png"));
+            System.out.println(fos.toString());
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void takeScreenshot() {
+        View view = content;
+        View v = view.getRootView();
+        v.setDrawingCacheEnabled(true);
+        Bitmap b = v.getDrawingCache();
+        String extr = Environment.getExternalStorageDirectory().toString();
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "MatchDayGAAScreenShot"
+                + System.currentTimeMillis() + ".png");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(f);
+            b.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            MediaStore.Images.Media.insertImage(getContentResolver(), b,
+                    "Screen", "screen");
+            openScreenshot(f);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -170,7 +192,7 @@ public class SquadBuilder extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_screen) {
             takeScreenshot();
             return true;
         }
