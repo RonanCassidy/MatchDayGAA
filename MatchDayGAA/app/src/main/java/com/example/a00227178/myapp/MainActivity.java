@@ -1,6 +1,7 @@
 package com.example.a00227178.myapp;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
@@ -37,6 +38,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //When the game is on a tablet set it to lanscape
+        if(getResources().getBoolean(R.bool.tablet)){
+            System.out.println(R.bool.tablet);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig),new TweetComposer());
         setContentView(R.layout.activity_main);

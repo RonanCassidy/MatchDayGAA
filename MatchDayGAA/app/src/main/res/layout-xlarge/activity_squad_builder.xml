@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
+    android:paddingLeft="0dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -25,16 +25,11 @@
         android:background="@android:color/white">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/mock_pitch"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/goalkeeper"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:src="@drawable/mock_pitch"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +38,7 @@
             android:text=""
             android:id="@+id/goalkeeper"
             android:gravity="center"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:textStyle="bold"
             android:layout_marginTop="29dp"
             android:layout_centerHorizontal="true" />
@@ -54,21 +49,20 @@
             android:id="@+id/no1"
             android:gravity="center"
             android:textStyle="bold|italic"
-            android:layout_marginLeft="20dp"
             android:text="1."
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:textColor="@android:color/holo_red_dark" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/rcb"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/goalkeeper" />
         <TextView
             android:layout_width="wrap_content"
@@ -79,7 +73,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:text="2."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/goalkeeper"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -87,25 +81,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/lcb"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="29dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/goalkeeper"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
             android:id="@+id/no4"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="200dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="35dp"
             android:text="4."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/goalkeeper"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -114,12 +109,12 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/fullback"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/goalkeeper" />
         <TextView
             android:layout_width="wrap_content"
@@ -128,35 +123,34 @@
             android:id="@+id/no3"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
             android:text="3."
             android:layout_below="@+id/goalkeeper"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:textColor="@android:color/holo_red_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/rhb"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/rcb" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
             android:id="@+id/no7"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="200dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="35dp"
             android:text="7."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/rcb"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -164,13 +158,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/lhb"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="29dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/rcb"/>
         <TextView
             android:layout_width="wrap_content"
@@ -181,7 +176,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:text="5."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/rcb"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -189,13 +184,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/center_back"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/rcb" />
         <TextView
             android:layout_width="wrap_content"
@@ -204,11 +199,10 @@
             android:id="@+id/no6"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
             android:text="6."
             android:layout_below="@+id/rcb"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:textColor="@android:color/holo_red_dark" />
 
 
@@ -221,21 +215,20 @@
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/center_back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
             android:id="@+id/no8"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="75dp"
+            android:layout_marginLeft="105dp"
             android:text="8."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/center_back"
             android:textColor="@android:color/holo_red_dark" />
         <TextView
@@ -246,21 +239,22 @@
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:maxWidth = "80sp"
-            android:layout_marginLeft="130dp"
-            android:layout_marginTop="29dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="70dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/center_back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/no9"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="165dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="105dp"
             android:text="9."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/center_back"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -271,13 +265,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/centre_forward"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/midfield1" />
         <TextView
             android:layout_width="wrap_content"
@@ -286,23 +280,22 @@
             android:id="@+id/no11"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
             android:text="11."
             android:layout_below="@+id/midfield1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:textColor="@android:color/holo_red_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth ="@dimen/max_width"
             android:id="@+id/rhf"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/midfield1"/>
         <TextView
             android:layout_width="wrap_content"
@@ -313,7 +306,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:text="10."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/midfield1"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -321,25 +314,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/lhf"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
             android:layout_below="@+id/midfield1"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="29dp"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="@dimen/margain_top_parent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
             android:id="@+id/no12"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="200dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="30dp"
             android:text="12."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/midfield1"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -347,14 +341,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/full_forward"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
             android:layout_below="@+id/centre_forward"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"/>
+            android:layout_marginTop="@dimen/margain_top_parent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -362,23 +356,22 @@
             android:id="@+id/no14"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
             android:text="14."
             android:layout_below="@+id/centre_forward"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:textColor="@android:color/holo_red_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/rff"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="@dimen/margain_top_parent"
             android:layout_below="@+id/centre_forward"/>
         <TextView
             android:layout_width="wrap_content"
@@ -389,7 +382,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:text="13."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/centre_forward"
             android:textColor="@android:color/holo_red_dark" />
 
@@ -397,25 +390,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
+            android:maxWidth = "@dimen/max_width"
             android:id="@+id/lff"
             android:gravity="center"
             android:textStyle="bold"
             android:text=""
             android:layout_below="@+id/centre_forward"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="29dp"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="@dimen/margain_top_parent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxWidth = "80sp"
             android:id="@+id/no15"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginLeft="200dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="30dp"
             android:text="15."
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margain_top_parent_number"
             android:layout_below="@+id/centre_forward"
             android:textColor="@android:color/holo_red_dark" />
 
