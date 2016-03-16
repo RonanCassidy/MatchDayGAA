@@ -40,7 +40,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         //When the game is on a tablet set it to lanscape
         if(getResources().getBoolean(R.bool.tablet)){
-            System.out.println(R.bool.tablet);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
 

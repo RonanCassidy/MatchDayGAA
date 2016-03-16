@@ -48,7 +48,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/no1"
             android:gravity="center"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             android:text="1."
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margain_top_parent_number"
