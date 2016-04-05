@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Home Team"
+            android:id="@+id/homeTeam"
+            android:layout_weight="0.15" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeTeamText"
+            android:inputType="textCapSentences"
+            android:layout_weight="1" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Away Team"
+            android:id="@+id/awayTeamName"
+            android:layout_weight="0.15"
+            android:layout_column="0" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/awayTeamText"
+            android:inputType="textCapSentences"
+            android:layout_weight="1"
+            android:layout_column="1"
+            android:layout_span="6" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Match Title"
+            android:id="@+id/matchTitle"
+            android:layout_weight="0.15"
+            android:layout_column="0" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchTitleText"
+            android:inputType="textCapSentences"
+            android:layout_weight="1"
+            android:layout_column="1"
+            android:layout_span="8" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Venue"
+            android:id="@+id/location"
+            android:layout_weight="0.15"
+            android:layout_column="0" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationText"
+            android:inputType="textCapSentences"
+            android:layout_weight="1"
+            android:layout_column="1"
+            android:layout_span="9" />
+    </TableRow>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="123dp"
+        android:text="Confirm Match"
+        android:id="@+id/confirmButton"
+        android:layout_column="0"
+        android:layout_span="10"
+        android:onClick="goMatchActivity" />
+</TableLayout>

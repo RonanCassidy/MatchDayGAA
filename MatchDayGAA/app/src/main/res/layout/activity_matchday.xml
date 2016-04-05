@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mock_pitch" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tweet"
+        android:id="@+id/tweetButton"
+        android:layout_gravity="right"
+        android:onClick="btnClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Edenderry"
+        android:maxWidth = "110sp"
+        android:id="@+id/homeTeamName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Goals"
+        android:id="@+id/textView5"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/homeTeamName"
+        android:layout_toEndOf="@+id/homeTeamName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Points"
+        android:id="@+id/textView3"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Away"
+        android:maxWidth = "110sp"
+        android:id="@+id/awayTeamName"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/homeTeamName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home Goal"
+        android:maxWidth = "120sp"
+        android:id="@+id/addHomeGoal"
+        android:layout_below="@+id/awayTeamName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:onClick="btnHomeGoalClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home Point"
+        android:maxWidth = "120sp"
+        android:id="@+id/addHomePoint"
+        android:layout_alignTop="@+id/addHomeGoal"
+        android:layout_toRightOf="@+id/addHomeGoal"
+        android:layout_toEndOf="@+id/addHomeGoal"
+        android:onClick="btnHomePointClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Away Goal"
+        android:maxWidth = "120sp"
+        android:id="@+id/addAwayGoal"
+        android:layout_below="@+id/addHomeGoal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="btnAwayGoalClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Away Point"
+        android:maxWidth = "120sp"
+        android:id="@+id/addAwayPoint"
+        android:layout_below="@+id/addHomePoint"
+        android:layout_toRightOf="@+id/addAwayGoal"
+        android:layout_toEndOf="@+id/addAwayGoal"
+        android:onClick="btnAwayPointClick" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/homeGoals"
+        android:layout_alignTop="@+id/homeTeamName"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="-"
+        android:id="@+id/textView7"
+        android:layout_alignTop="@+id/homeGoals"
+        android:layout_toRightOf="@+id/textView5"
+        android:layout_toEndOf="@+id/textView5"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/homePoints"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/awayGoals"
+        android:layout_alignTop="@+id/awayTeamName"
+        android:layout_alignLeft="@+id/homeGoals"
+        android:layout_alignStart="@+id/homeGoals" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="-"
+        android:id="@+id/textView11"
+        android:layout_alignTop="@+id/awayGoals"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/awayPoints"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_alignLeft="@+id/homePoints"
+        android:layout_alignEnd="@+id/homePoints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time"
+        android:id="@+id/textView4"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="(0)"
+        android:id="@+id/homeTotal"
+        android:layout_alignTop="@+id/homePoints"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="(0)"
+        android:id="@+id/awayTotal"
+        android:layout_alignTop="@+id/awayPoints"
+        android:layout_alignLeft="@+id/homeTotal"
+        android:layout_alignEnd="@+id/homeTotal" />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer"
+        android:layout_alignBaseline="@+id/homeTotal"
+        android:layout_alignBottom="@+id/homeTotal"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="italic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start 1st Half"
+        android:id="@+id/timeManagement"
+        android:layout_gravity="right"
+        android:onClick="btnTimeClick"
+        android:layout_above="@+id/tweetButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

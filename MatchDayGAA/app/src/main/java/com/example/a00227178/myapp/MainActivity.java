@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //When the game is on a tablet set it to lanscape
+        //When the game is on a tablet set it to landscape
         if(getResources().getBoolean(R.bool.tablet)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
@@ -74,38 +74,14 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    public void btnClick(View v)
-    {
-        boolean twitterInstalled = false;
-
-        try{
-            ApplicationInfo info = getPackageManager().
-                    getApplicationInfo("com.twitter.android", 0 );
-            twitterInstalled = true;
-        }
-        catch( PackageManager.NameNotFoundException e )
-        {
-        }
-        System.out.println("hellooooo " + twitterInstalled);
-        if(twitterInstalled) {
-            TweetComposer.Builder builder = new TweetComposer.Builder(this)
-                    .text("@A00227178 this is placeholder text");
-            builder.show();
-        }
-        else{
-
-            final TwitterSession session = TwitterCore.getInstance().getSessionManager()
-                    .getActiveSession();
-            System.out.println("hellooooo "+session);
-            final Intent intent = new ComposerActivity.Builder(MainActivity.this)
-                    .session(session)
-                    .createIntent();
-            startActivity(intent);
-        }
-    }
     public void goSquadActivity(View v)
     {
         Intent intent = new Intent(this, SquadBuilder.class);
+        startActivity(intent);
+    }
+    public void goMatchActivity(View v)
+    {
+        Intent intent = new Intent(this, SetUpMatch.class);
         startActivity(intent);
     }
     @Override

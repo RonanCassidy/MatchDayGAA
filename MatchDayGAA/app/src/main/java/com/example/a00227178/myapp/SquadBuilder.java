@@ -88,13 +88,16 @@ public class SquadBuilder extends ActionBarActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         int menuItemTitle = item.getOrder();
 
-
         String listItemName = squad[info.position];
         TextView tv1 = getTextView(menuItemTitle);
         tv1.setText(listItemName);
         Toast.makeText(getApplicationContext(),listItemName+ " is now at " + menuItemTitle,Toast.LENGTH_LONG).show();
 
         return true;
+    }
+    private void addPlayerToSquad()
+    {
+
     }
     private void captureScreen() {
         View v = findViewById(R.id.team_layout);
@@ -176,6 +179,10 @@ public class SquadBuilder extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_screen) {
             captureScreen();
+            return true;
+        }
+        if (id == R.id.action_add) {
+            addPlayerToSquad();
             return true;
         }
 
