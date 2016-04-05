@@ -23,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Edenderry"
-        android:maxWidth = "110sp"
+        android:text="Yo"
+        android:maxWidth = "100sp"
         android:id="@+id/homeTeamName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -40,7 +40,8 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/homeTeamName"
-        android:layout_toEndOf="@+id/homeTeamName" />
+        android:layout_toEndOf="@+id/awayTeamName"
+        android:layout_marginLeft="25dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Away"
-        android:maxWidth = "110sp"
+        android:maxWidth = "100sp"
         android:id="@+id/awayTeamName"
         android:layout_marginTop="28dp"
         android:layout_below="@+id/homeTeamName"
@@ -153,9 +154,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/awayGoals"
+
         android:layout_alignTop="@+id/awayTeamName"
-        android:layout_alignLeft="@+id/homeGoals"
-        android:layout_alignStart="@+id/homeGoals" />
+        android:layout_alignLeft="@+id/homeGoals" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -174,8 +175,7 @@
         android:text="0"
         android:id="@+id/awayPoints"
         android:layout_alignTop="@+id/textView11"
-        android:layout_alignLeft="@+id/homePoints"
-        android:layout_alignEnd="@+id/homePoints" />
+        android:layout_alignLeft="@+id/homePoints" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
         android:id="@+id/awayTotal"
         android:layout_alignTop="@+id/awayPoints"
         android:layout_alignLeft="@+id/homeTotal"
-        android:layout_alignEnd="@+id/homeTotal" />
+        />
 
     <Chronometer
         android:layout_width="wrap_content"
@@ -229,5 +229,15 @@
         android:layout_above="@+id/tweetButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Throw-in"
+        android:id="@+id/halfText"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

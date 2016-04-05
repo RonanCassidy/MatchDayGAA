@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ronan on 03/04/2016.
@@ -67,16 +70,26 @@ public class MatchDay extends ActionBarActivity {
         TextView currentHomePoints = (TextView) findViewById(R.id.homePoints);
         TextView currentAwayGoals = (TextView) findViewById(R.id.awayGoals);
         TextView currentAwayPoints = (TextView) findViewById(R.id.awayPoints);
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
 
         TextView homeTotal = (TextView) findViewById(R.id.homeTotal);
         TextView awayTotal = (TextView) findViewById(R.id.awayTotal);
-        Chronometer ch = (Chronometer) findViewById(R.id.chronometer);
+
+        Chronometer ch = (Chronometer)findViewById(R.id.chronometer);
+
+        long elapsedMillis = SystemClock.elapsedRealtime() - ch.getBase();
+        String time = String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(elapsedMillis),
+                TimeUnit.MILLISECONDS.toSeconds(elapsedMillis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsedMillis))
+        );
 
         String s = (title + System.getProperty("line.separator") +
-                "14:50 2nd Half" + System.getProperty("line.separator")
+                time +" "+ halfIndicator.getText().toString() + System.getProperty("line.separator")
                 + homeTeam +" "+currentHomeGoals.getText().toString()+"-"+currentHomePoints.getText().toString()+" "+homeTotal.getText().toString()+ System.getProperty("line.separator")
                 + awayTeam +" "+currentAwayGoals.getText().toString()+"-"+currentAwayPoints.getText().toString()+" "+awayTotal.getText().toString()
                 + System.getProperty("line.separator")+"in " + location);
+
         return s;
     }
     public void btnClick(View v) {
@@ -108,18 +121,29 @@ public class MatchDay extends ActionBarActivity {
 
         Chronometer ch = (Chronometer)findViewById(R.id.chronometer);
         Button timeButton = (Button)findViewById(R.id.timeManagement);
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
 
         if(timeButton.getText().equals("Start 1st Half")) {
+            ch.setBase(SystemClock.elapsedRealtime());
             ch.start();
+            halfIndicator.setText("1st Half");
             timeButton.setText("Half Time");
         }
         else if(timeButton.getText().equals("Half Time")) {
             ch.stop();
+            halfIndicator.setText("Half Time");
             timeButton.setText("Start 2nd Half");
         }
         else if(timeButton.getText().equals("Start 2nd Half")) {
+            ch.setBase(SystemClock.elapsedRealtime());
             ch.start();
+            halfIndicator.setText("2nd Half");
             timeButton.setText("Full Time");
+        }
+        else if(timeButton.getText().equals("Full Time")) {
+            ch.stop();
+            halfIndicator.setEnabled(false);
+            halfIndicator.setText("Full Time");
         }
 
     }
