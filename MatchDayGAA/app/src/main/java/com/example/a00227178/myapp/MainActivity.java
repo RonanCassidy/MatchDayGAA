@@ -76,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
     }
     public void goSquadActivity(View v)
     {
-        Intent intent = new Intent(this, SquadBuilder.class);
+        Intent intent = new Intent(this, SetUpSquad.class);
         startActivity(intent);
     }
     public void goMatchActivity(View v)

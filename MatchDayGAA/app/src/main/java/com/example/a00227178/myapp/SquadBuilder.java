@@ -1,8 +1,10 @@
 package com.example.a00227178.myapp;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -12,33 +14,44 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.internal.widget.AdapterViewCompat;
+import android.text.InputType;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 public class SquadBuilder extends ActionBarActivity {
-
-    String[] squad = {"Ronan Cassidy","Tom Devery","Johnny Kenny","Georgie Digan", "Darren Kelly","Colin Kenny","Colm Kelly","Pat Brennan",
-            "Jordan Drennan","Steven Thompson","Billy Dunican", "Joe Kenny","Oisin Kelly","David Kelly","Ronan McGuire","Simon Goodman","B.Kenny"};
     ArrayAdapter<String> adapter;
     View content;
+    String m_Text = "";
+    List<String> list = new ArrayList<String>();
+    ArrayList<String> myList = new ArrayList<String>();
+    ListView listView;
+    String teamName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +61,21 @@ public class SquadBuilder extends ActionBarActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
         setContentView(R.layout.activity_squad_builder);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            teamName = extras.getString("team");
+            setTitle(teamName);
+        }
+
         content = findViewById(R.id.team_layout);
-        ListView listView = (ListView) findViewById(R.id.listview);
-        final ArrayList<String> list = new ArrayList<String>();
+        listView = (ListView) findViewById(R.id.listview);
+        ArrayList<String> squad = loadInSquad();
 
+        for(int i = 0; i < squad.size(); i++) {
+            myList.add(squad.get(i).toString());
+        }
         adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, squad);
-
+                android.R.layout.simple_list_item_1, android.R.id.text1, myList);
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
@@ -82,22 +103,107 @@ public class SquadBuilder extends ActionBarActivity {
         menu.add(0, v.getId(), 13, "13: Right-Corner Forward");
         menu.add(0, v.getId(), 14, "14: Full-Forward");
         menu.add(0, v.getId(), 15, "15: Left-Corner Forward");
+        menu.add(0, v.getId(), 16, "DELETE FROM SQUAD");
     }
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         int menuItemTitle = item.getOrder();
-
-        String listItemName = squad[info.position];
-        TextView tv1 = getTextView(menuItemTitle);
-        tv1.setText(listItemName);
-        Toast.makeText(getApplicationContext(),listItemName+ " is now at " + menuItemTitle,Toast.LENGTH_LONG).show();
-
+        if(menuItemTitle == 16)
+        {
+            myList.remove(info.position);
+            adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
+            registerForContextMenu(listView);
+        }
+        else {
+            String listItemName = myList.get(info.position);
+            TextView tv1 = getTextView(menuItemTitle);
+            tv1.setText(listItemName);
+            Toast.makeText(getApplicationContext(), listItemName + " is now at " + menuItemTitle, Toast.LENGTH_LONG).show();
+        }
         return true;
     }
     private void addPlayerToSquad()
     {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Player");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+
+        input.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                m_Text = input.getText().toString();
+                myList.add(m_Text);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+
+    }
+    private void saveSquadList(ArrayList<String> data) {
+        String path = Environment.getExternalStorageDirectory() + "/MatchDayGAA/";
+        String string = "Hello world!";
+
+        File dir = new File(path);
+        dir.mkdirs();
+        File file = new File(path +teamName+".txt");
+
+        FileOutputStream fOut = null;
+        try {
+            fOut = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        OutputStreamWriter osw = new OutputStreamWriter(fOut);
+
+        try {
+            for(int i = 0; i < data.size(); i++) {
+                osw.write(data.get(i).toString()+"\n");
+                Toast.makeText(getApplicationContext(), data.get(i).toString(), Toast.LENGTH_LONG).show();
+            }
+            osw.flush();
+            osw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private ArrayList<String> loadInSquad()
+    {
+        String path = Environment.getExternalStorageDirectory() + "/MatchDayGAA/";
+        File file = new File(path +teamName+".txt");
+        Toast.makeText(getApplicationContext(),file.getName() + " ", Toast.LENGTH_LONG).show();
+        //Read text from file
+        ArrayList<String> text = new ArrayList<String>();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.add(line);
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            //You'll need to add proper error handling here
+        }
+        return text;
     }
     private void captureScreen() {
         View v = findViewById(R.id.team_layout);
@@ -183,6 +289,14 @@ public class SquadBuilder extends ActionBarActivity {
         }
         if (id == R.id.action_add) {
             addPlayerToSquad();
+
+            adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
+            registerForContextMenu(listView);
+            return true;
+        }
+        if (id == R.id.action_save) {
+            saveSquadList(myList);
             return true;
         }
 

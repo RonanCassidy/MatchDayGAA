@@ -3,10 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.a00227178.myapp.SquadBuilder">
     <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_action_name"
+        android:title="save"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/action_add"
-        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:icon="@drawable/ic_action_add"
         android:title="add"
         app:showAsAction="ifRoom"/>
-    <item android:id="@+id/action_screen" android:title="@string/action_screen"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_screen"
+        android:icon="@drawable/ic_action_name2"
+        android:title="@string/action_screen"
+        app:showAsAction="ifRoom"/>
 </menu>
