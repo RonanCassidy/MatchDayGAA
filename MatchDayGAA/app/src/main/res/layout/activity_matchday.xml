@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Yo"
-        android:maxWidth = "100sp"
+        android:maxWidth = "110sp"
         android:id="@+id/homeTeamName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Away"
-        android:maxWidth = "100sp"
+        android:maxWidth = "110sp"
         android:id="@+id/awayTeamName"
         android:layout_marginTop="28dp"
         android:layout_below="@+id/homeTeamName"
@@ -71,45 +71,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home Goal"
-        android:maxWidth = "120sp"
+        android:maxWidth = "180sp"
         android:id="@+id/addHomeGoal"
         android:layout_below="@+id/awayTeamName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
+        android:drawableRight="@drawable/a_green_flag"
         android:onClick="btnHomeGoalClick" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home Point"
-        android:maxWidth = "120sp"
+        android:maxWidth = "180sp"
         android:id="@+id/addHomePoint"
         android:layout_alignTop="@+id/addHomeGoal"
         android:layout_toRightOf="@+id/addHomeGoal"
         android:layout_toEndOf="@+id/addHomeGoal"
+        android:drawableRight="@drawable/a_white_flag"
         android:onClick="btnHomePointClick" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Away Goal"
-        android:maxWidth = "120sp"
+        android:maxWidth = "180sp"
         android:id="@+id/addAwayGoal"
         android:layout_below="@+id/addHomeGoal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:drawableRight="@drawable/a_green_flag"
         android:onClick="btnAwayGoalClick" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Away Point"
-        android:maxWidth = "120sp"
+        android:maxWidth = "180sp"
         android:id="@+id/addAwayPoint"
         android:layout_below="@+id/addHomePoint"
         android:layout_toRightOf="@+id/addAwayGoal"
         android:layout_toEndOf="@+id/addAwayGoal"
+        android:drawableRight="@drawable/a_white_flag"
         android:onClick="btnAwayPointClick" />
 
     <TextView
@@ -217,7 +221,8 @@
         android:layout_alignRight="@+id/textView4"
         android:layout_alignEnd="@+id/textView4"
         android:textSize="@dimen/abc_text_size_medium_material"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:onClick="clockClick" />
 
     <Button
         android:layout_width="wrap_content"

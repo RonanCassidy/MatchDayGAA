@@ -32,10 +32,10 @@ public class SetUpMatch extends ActionBarActivity {
     }
     public void goMatchActivity(View v) {
 
-        String home = ((EditText) findViewById(R.id.homeTeamText)).getText().toString();
-        String away = ((EditText)findViewById(R.id.awayTeamText)).getText().toString();
-        String location = ((EditText)findViewById(R.id.locationText)).getText().toString();
-        String matchTitle = ((EditText)findViewById(R.id.matchTitleText)).getText().toString();
+        String home = ((EditText) findViewById(R.id.homeTeamText)).getText().toString().trim();
+        String away = ((EditText)findViewById(R.id.awayTeamText)).getText().toString().trim();
+        String location = ((EditText)findViewById(R.id.locationText)).getText().toString().trim();
+        String matchTitle = ((EditText)findViewById(R.id.matchTitleText)).getText().toString().trim();
 
         if(home.equals("") || away.equals("") || location.equals("") || matchTitle.equals("")){
             new AlertDialog.Builder(this)

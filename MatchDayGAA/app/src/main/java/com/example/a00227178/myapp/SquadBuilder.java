@@ -109,6 +109,7 @@ public class SquadBuilder extends ActionBarActivity {
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         int menuItemTitle = item.getOrder();
+        //16 is to delete
         if(menuItemTitle == 16)
         {
             myList.remove(info.position);
@@ -144,6 +145,7 @@ public class SquadBuilder extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 m_Text = input.getText().toString();
                 myList.add(m_Text);
+                Toast.makeText(getApplicationContext(), m_Text+" has been added to "+teamName, Toast.LENGTH_LONG).show();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -158,10 +160,10 @@ public class SquadBuilder extends ActionBarActivity {
     }
     private void saveSquadList(ArrayList<String> data) {
         String path = Environment.getExternalStorageDirectory() + "/MatchDayGAA/";
-        String string = "Hello world!";
 
         File dir = new File(path);
         dir.mkdirs();
+
         File file = new File(path +teamName+".txt");
 
         FileOutputStream fOut = null;
@@ -174,11 +176,11 @@ public class SquadBuilder extends ActionBarActivity {
 
         try {
             for(int i = 0; i < data.size(); i++) {
-                osw.write(data.get(i).toString()+"\n");
-                Toast.makeText(getApplicationContext(), data.get(i).toString(), Toast.LENGTH_LONG).show();
+                osw.write(data.get(i).toString() + "\n");
             }
             osw.flush();
             osw.close();
+            Toast.makeText(getApplicationContext(), teamName+" has been saved", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -187,7 +189,6 @@ public class SquadBuilder extends ActionBarActivity {
     {
         String path = Environment.getExternalStorageDirectory() + "/MatchDayGAA/";
         File file = new File(path +teamName+".txt");
-        Toast.makeText(getApplicationContext(),file.getName() + " ", Toast.LENGTH_LONG).show();
         //Read text from file
         ArrayList<String> text = new ArrayList<String>();
 
@@ -198,6 +199,7 @@ public class SquadBuilder extends ActionBarActivity {
             while ((line = br.readLine()) != null) {
                 text.add(line);
             }
+            Toast.makeText(getApplicationContext(), teamName+" has successfully been loaded", Toast.LENGTH_LONG).show();
             br.close();
         }
         catch (IOException e) {
@@ -275,6 +277,7 @@ public class SquadBuilder extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_squad_builder, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

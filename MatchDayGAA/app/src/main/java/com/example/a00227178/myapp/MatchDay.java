@@ -1,5 +1,7 @@
 package com.example.a00227178.myapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -7,6 +9,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +19,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -31,6 +37,7 @@ public class MatchDay extends ActionBarActivity {
     String awayTeam = "";
     String location = "";
     String title = "";
+    String newTime = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //When the game is on a tablet set it to landscape
@@ -76,20 +83,25 @@ public class MatchDay extends ActionBarActivity {
         TextView awayTotal = (TextView) findViewById(R.id.awayTotal);
 
         Chronometer ch = (Chronometer)findViewById(R.id.chronometer);
+        String prev = halfIndicator.getText().toString();
 
         long elapsedMillis = SystemClock.elapsedRealtime() - ch.getBase();
-        String time = String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes(elapsedMillis),
-                TimeUnit.MILLISECONDS.toSeconds(elapsedMillis) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(elapsedMillis))
-        );
+        String time = String.format("%d min",
+                TimeUnit.MILLISECONDS.toMinutes(elapsedMillis)
 
-        String s = (title + System.getProperty("line.separator") +
-                time +" "+ halfIndicator.getText().toString() + System.getProperty("line.separator")
+        );
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        {
+
+            time = "";
+        }
+
+        String s = (title +" "+ time + System.getProperty("line.separator")
+                + halfIndicator.getText().toString() + System.getProperty("line.separator")
                 + homeTeam +" "+currentHomeGoals.getText().toString()+"-"+currentHomePoints.getText().toString()+" "+homeTotal.getText().toString()+ System.getProperty("line.separator")
                 + awayTeam +" "+currentAwayGoals.getText().toString()+"-"+currentAwayPoints.getText().toString()+" "+awayTotal.getText().toString()
                 + System.getProperty("line.separator")+"in " + location);
-
+        halfIndicator.setText(prev);
         return s;
     }
     public void btnClick(View v) {
@@ -148,32 +160,61 @@ public class MatchDay extends ActionBarActivity {
 
     }
     public void btnHomeGoalClick(View v) {
-        TextView currentHomeGoals = (TextView) findViewById(R.id.homeGoals);
-        int homeGoals = Integer.valueOf(currentHomeGoals.getText().toString());
-        homeGoals = homeGoals+1;
-        currentHomeGoals.setText(String.valueOf(homeGoals));
-        updateTotals();
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        {
+
+        }
+        else {
+            TextView currentHomeGoals = (TextView) findViewById(R.id.homeGoals);
+            int homeGoals = Integer.valueOf(currentHomeGoals.getText().toString());
+            homeGoals = homeGoals + 1;
+            currentHomeGoals.setText(String.valueOf(homeGoals));
+            updateTotals();
+        }
     }
     public void btnHomePointClick(View v) {
-        TextView currentHomePoints = (TextView) findViewById(R.id.homePoints);
-        int homePoints = Integer.valueOf(currentHomePoints.getText().toString());
-        homePoints = homePoints+1;
-        currentHomePoints.setText(String.valueOf(homePoints));
-        updateTotals();
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        {
+
+        }
+        else {
+            TextView currentHomePoints = (TextView) findViewById(R.id.homePoints);
+            int homePoints = Integer.valueOf(currentHomePoints.getText().toString());
+            homePoints = homePoints + 1;
+            currentHomePoints.setText(String.valueOf(homePoints));
+            updateTotals();
+        }
     }
     public void btnAwayGoalClick(View v) {
-        TextView currentAwayGoals = (TextView) findViewById(R.id.awayGoals);
-        int awayGoals = Integer.valueOf(currentAwayGoals.getText().toString());
-        awayGoals = awayGoals+1;
-        currentAwayGoals.setText(String.valueOf(awayGoals));
-        updateTotals();
+
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        {
+
+        }
+        else {
+            TextView currentAwayGoals = (TextView) findViewById(R.id.awayGoals);
+            int awayGoals = Integer.valueOf(currentAwayGoals.getText().toString());
+            awayGoals = awayGoals + 1;
+            currentAwayGoals.setText(String.valueOf(awayGoals));
+            updateTotals();
+        }
     }
     public void btnAwayPointClick(View v) {
-        TextView currentAwayPoints = (TextView) findViewById(R.id.awayPoints);
-        int awayPoints = Integer.valueOf(currentAwayPoints.getText().toString());
-        awayPoints = awayPoints+1;
-        currentAwayPoints.setText(String.valueOf(awayPoints));
-        updateTotals();
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        {
+
+        }
+        else {
+            TextView currentAwayPoints = (TextView) findViewById(R.id.awayPoints);
+            int awayPoints = Integer.valueOf(currentAwayPoints.getText().toString());
+            awayPoints = awayPoints + 1;
+            currentAwayPoints.setText(String.valueOf(awayPoints));
+            updateTotals();
+        }
     }
     public void updateTotals()
     {
@@ -193,7 +234,76 @@ public class MatchDay extends ActionBarActivity {
         int awayTotalScore = (awayGoals * 3) + awayPoints;
 
         homeTotal.setText("("+String.valueOf(homeTotalScore)+")");
-        awayTotal.setText("("+String.valueOf(awayTotalScore)+")");
+        awayTotal.setText("(" + String.valueOf(awayTotalScore) + ")");
+    }
+    public void clockClick(View v) {
+        Button timeButton = (Button)findViewById(R.id.timeManagement);
+        if(timeButton.getText().equals("Start 1st Half"))
+        {
+            Toast.makeText(getApplicationContext(), "You must Start the game before editing time", Toast.LENGTH_LONG).show();
+        }
+        else if(timeButton.getText().equals("Start 2nd Half"))
+        {
+            Toast.makeText(getApplicationContext(), "You begin 2nd Half before editing time", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Set Current Minute");
+            final Chronometer ch = (Chronometer)findViewById(R.id.chronometer);
+            // Set up the input
+            final EditText input = new EditText(this);
+            int maxLength = 2;
+            input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(maxLength)});
+            input.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(input.getText().toString().equals("") || Integer.parseInt(input.getText().toString()) > 30 )
+                    {
+                        dialog.cancel();
+                        Toast.makeText(getApplicationContext(), "Time cant be empty or more than 30", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        newTime = input.getText().toString();
+                        ch.setBase(SystemClock.elapsedRealtime() - Integer.parseInt(newTime) * 60 * 1000);
+                        Toast.makeText(getApplicationContext(), newTime, Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+        new AlertDialog.Builder(this)
+                .setTitle("Quit Match?")
+                .setMessage("Are you sure you want to quit the game?")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
