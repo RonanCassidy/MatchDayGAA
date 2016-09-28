@@ -159,11 +159,31 @@ public class MatchDay extends ActionBarActivity {
         }
 
     }
+    public void minusHomeGoal(View v)
+    {
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        TextView currentHomeGoals = (TextView) findViewById(R.id.homeGoals);
+        int homeGoals = Integer.valueOf(currentHomeGoals.getText().toString());
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
+        {
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
+        }
+        else if( homeGoals == 0)
+        {
+            Toast.makeText(getApplicationContext(), "No goals left to takeaway", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            homeGoals = homeGoals - 1;
+            currentHomeGoals.setText(String.valueOf(homeGoals));
+            updateTotals();
+        }
+    }
     public void btnHomeGoalClick(View v) {
         TextView halfIndicator = (TextView)findViewById(R.id.halfText);
-        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
         {
-
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
         }
         else {
             TextView currentHomeGoals = (TextView) findViewById(R.id.homeGoals);
@@ -173,11 +193,31 @@ public class MatchDay extends ActionBarActivity {
             updateTotals();
         }
     }
+    public void minusHomePoint(View v)
+    {
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        TextView currentHomePoints = (TextView) findViewById(R.id.homePoints);
+        int homePoints = Integer.valueOf(currentHomePoints.getText().toString());
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
+        {
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
+        }
+        else if(homePoints == 0)
+        {
+            Toast.makeText(getApplicationContext(), "No points left to takeaway", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            homePoints = homePoints - 1;
+            currentHomePoints.setText(String.valueOf(homePoints));
+            updateTotals();
+        }
+    }
     public void btnHomePointClick(View v) {
         TextView halfIndicator = (TextView)findViewById(R.id.halfText);
-        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
         {
-
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
         }
         else {
             TextView currentHomePoints = (TextView) findViewById(R.id.homePoints);
@@ -187,12 +227,32 @@ public class MatchDay extends ActionBarActivity {
             updateTotals();
         }
     }
+    public void minusAwayGoal(View v)
+    {
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        TextView currentAwayGoals = (TextView) findViewById(R.id.awayGoals);
+        int awayGoals = Integer.valueOf(currentAwayGoals.getText().toString());
+
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
+        {
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
+        }
+        else if(awayGoals == 0)
+        {
+            Toast.makeText(getApplicationContext(), "No goals left to takeaway", Toast.LENGTH_LONG).show();
+        }
+        else {
+            awayGoals = awayGoals - 1;
+            currentAwayGoals.setText(String.valueOf(awayGoals));
+            updateTotals();
+        }
+    }
     public void btnAwayGoalClick(View v) {
 
         TextView halfIndicator = (TextView)findViewById(R.id.halfText);
-        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
         {
-
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
         }
         else {
             TextView currentAwayGoals = (TextView) findViewById(R.id.awayGoals);
@@ -202,11 +262,32 @@ public class MatchDay extends ActionBarActivity {
             updateTotals();
         }
     }
+    public void minusAwayPoint(View v)
+    {
+        TextView halfIndicator = (TextView)findViewById(R.id.halfText);
+        TextView currentAwayPoints = (TextView) findViewById(R.id.awayPoints);
+        int awayPoints = Integer.valueOf(currentAwayPoints.getText().toString());
+        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
+        {
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
+        }
+        else if(awayPoints == 0)
+        {
+            Toast.makeText(getApplicationContext(), "No points left to takeaway", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+
+            awayPoints = awayPoints - 1;
+            currentAwayPoints.setText(String.valueOf(awayPoints));
+            updateTotals();
+        }
+    }
     public void btnAwayPointClick(View v) {
         TextView halfIndicator = (TextView)findViewById(R.id.halfText);
-        if(halfIndicator.getText().toString().equals("Full Time") ||halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Start 1st Half"))
+        if(halfIndicator.getText().toString().equals("Full Time") || halfIndicator.getText().toString().equals("Half Time") ||halfIndicator.getText().toString().equals("Throw-in"))
         {
-
+            Toast.makeText(getApplicationContext(), "You must be in Game Time before adding score", Toast.LENGTH_LONG).show();
         }
         else {
             TextView currentAwayPoints = (TextView) findViewById(R.id.awayPoints);

@@ -15,9 +15,10 @@
         android:id="@+id/tweetButton"
         android:layout_gravity="right"
         android:onClick="btnClick"
+        android:drawableRight="@mipmap/ic_twitter_logo"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,7 +69,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="180sp"
         android:layout_height="wrap_content"
         android:text="Home Goal"
         android:maxWidth = "180sp"
@@ -93,7 +94,7 @@
         android:onClick="btnHomePointClick" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="180sp"
         android:layout_height="wrap_content"
         android:text="Away Goal"
         android:maxWidth = "180sp"
@@ -231,7 +232,8 @@
         android:id="@+id/timeManagement"
         android:layout_gravity="right"
         android:onClick="btnTimeClick"
-        android:layout_above="@+id/tweetButton"
+        android:drawableRight="@mipmap/ic_whistle_icon"
+        android:layout_alignTop="@+id/tweetButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -244,5 +246,53 @@
         android:layout_below="@+id/textView4"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Goal"
+        android:id="@+id/button2"
+        android:layout_below="@+id/awayTeamName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="minusHomeGoal"
+        android:textColor="#ff0000" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Point"
+        android:id="@+id/button3"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toRightOf="@+id/addHomeGoal"
+        android:layout_toEndOf="@+id/addHomeGoal"
+        android:onClick="minusHomePoint"
+        android:textColor="#ff0000" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Goal"
+        android:id="@+id/button4"
+        android:layout_below="@+id/addAwayGoal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="minusAwayGoal"
+        android:textColor="#ff0000" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Point"
+        android:id="@+id/button5"
+        android:layout_below="@+id/addAwayGoal"
+        android:layout_toRightOf="@+id/addAwayGoal"
+        android:layout_toEndOf="@+id/addAwayGoal"
+        android:onClick="minusAwayPoint"
+        android:textColor="#ff0000" />
 
 </RelativeLayout>

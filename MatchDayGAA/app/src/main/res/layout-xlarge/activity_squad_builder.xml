@@ -413,5 +413,19 @@
             android:textColor="@android:color/holo_red_dark" />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
 
+        android:id="@+id/top_layout">
+        <ImageView
+            android:id="@+id/ivInstruction"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:src="@drawable/help"
+            android:background="#d6908d8d" />
+
+    </RelativeLayout>
 </RelativeLayout>

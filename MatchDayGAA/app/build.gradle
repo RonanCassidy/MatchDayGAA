@@ -25,6 +25,8 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -33,11 +35,20 @@ android {
         }
     }
 }
-
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:22.1.0'
+}
 dependencies {
+
+    compile 'com.android.support:support-annotations:22.2.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile('com.twitter.sdk.android:twitter:1.12.1@aar') {
         transitive = true;
     }
+    androidTestCompile 'com.android.support:support-annotations:22.2.0'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+
 }

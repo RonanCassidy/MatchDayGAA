@@ -6,6 +6,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,6 +54,7 @@ public class SquadBuilder extends ActionBarActivity {
     ArrayList<String> myList = new ArrayList<String>();
     ListView listView;
     String teamName = "";
+    View topLevelLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +64,15 @@ public class SquadBuilder extends ActionBarActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
         setContentView(R.layout.activity_squad_builder);
+        topLevelLayout = findViewById(R.id.top_layout);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             teamName = extras.getString("team");
             setTitle(teamName);
         }
-
+        if (isFirstTime()) {
+            //topLevelLayout.setVisibility(View.INVISIBLE);
+        }
         content = findViewById(R.id.team_layout);
         listView = (ListView) findViewById(R.id.listview);
         ArrayList<String> squad = loadInSquad();
@@ -158,6 +164,46 @@ public class SquadBuilder extends ActionBarActivity {
 
 
     }
+    private String checkIfOnTeam(String playerName)
+    {
+        String fullTitle;
+        for(int i = 1; i < 15;i++)
+        {
+            TextView tv = getTextView(i);
+            if(tv.getText().equals(playerName))
+            {
+                fullTitle = playerName + ","+i;
+                return fullTitle;
+            }
+        }
+        return playerName;
+
+    }
+    private boolean isFirstTime()
+    {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        //if (!ranBefore) {
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+            topLevelLayout.setVisibility(View.VISIBLE);
+            topLevelLayout.setOnTouchListener(new View.OnTouchListener(){
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    topLevelLayout.setVisibility(View.INVISIBLE);
+                    return false;
+                }
+
+            });
+
+
+        //}
+        return ranBefore;
+
+    }
     private void saveSquadList(ArrayList<String> data) {
         String path = Environment.getExternalStorageDirectory() + "/MatchDayGAA/";
 
@@ -176,7 +222,9 @@ public class SquadBuilder extends ActionBarActivity {
 
         try {
             for(int i = 0; i < data.size(); i++) {
-                osw.write(data.get(i).toString() + "\n");
+                String pName = data.get(i).toString();
+                pName = checkIfOnTeam(pName);
+                osw.write(pName + "\n");
             }
             osw.flush();
             osw.close();
@@ -195,9 +243,25 @@ public class SquadBuilder extends ActionBarActivity {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
+            String pName = "";
+            Integer pNum = 0;
 
             while ((line = br.readLine()) != null) {
-                text.add(line);
+                if(line.contains(","))
+                {
+                    String[] parts = line.split(",");
+                    pName = parts[0];
+                    pNum = Integer.valueOf(parts[1]);
+                }
+                else
+                    pName = line;
+
+                text.add(pName);
+                if(pNum != 0) {
+                    TextView tv = getTextView(pNum);
+                    tv.setText(pName);
+                    pNum=0;
+                }
             }
             Toast.makeText(getApplicationContext(), teamName+" has successfully been loaded", Toast.LENGTH_LONG).show();
             br.close();
@@ -207,11 +271,19 @@ public class SquadBuilder extends ActionBarActivity {
         }
         return text;
     }
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
     private void captureScreen() {
         View v = findViewById(R.id.team_layout);
         v.setDrawingCacheEnabled(true);
         Bitmap bmp = Bitmap.createBitmap(v.getDrawingCache());
         v.setDrawingCacheEnabled(false);
+
         try {
             File f = new File(Environment.getExternalStorageDirectory()
                     + File.separator + "MatchDayGAAScreenShot"
@@ -221,9 +293,10 @@ public class SquadBuilder extends ActionBarActivity {
             bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.flush();
             fos.close();
-            openScreenshot(f);
+
+        openScreenshot(f);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
